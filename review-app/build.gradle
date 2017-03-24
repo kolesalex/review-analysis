@@ -1,0 +1,49 @@
+group 'com.kolesa.alex.analysis.reviews'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-context', version: '4.3.6.RELEASE'
+    compile 'com.sparkjava:spark-core:2.3'
+    compile group: 'org.apache.spark', name: 'spark-core_2.10', version: '1.6.2'
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.10', version: '2.8.6'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile group: 'org.springframework.batch', name: 'spring-batch-core', version: '3.0.7.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '4.3.7.RELEASE'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.6'
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.7.RELEASE'
+
+    // tag::jetty[]
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+        exclude module: "logback-classic"
+
+    }
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty', version: '1.5.2.RELEASE'
+
+//    compile("org.springframework.boot:spring-boot-starter-jetty"){
+//        exclude module: "org.eclipse.jetty.websocket"
+//    }
+
+    compile("org.springframework.boot:spring-boot-starter-actuator") {
+        exclude module: "logback-classic"
+    }
+    testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.6.RELEASE'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
